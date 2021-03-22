@@ -5,7 +5,8 @@
         "core": "*",
         "microphone": "*",
         "bluetooth": "*",
-        "neopixel": "github:microsoft/pxt-neopixel"
+        "neopixel": "github:microsoft/pxt-neopixel#v0.6.15"
+      
         
     },
     "files": [

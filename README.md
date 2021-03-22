@@ -32,3 +32,5 @@ MakeCode에서 이 저장소를 편집합니다.
 
 
   "neopixel": "github:kittenbot/pxt-neopixel#v0.6.15"
+   "neopixel": "github:sbb777/pxt-neopixel#v0.6.15"
+   

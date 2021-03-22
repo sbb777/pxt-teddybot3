@@ -6,6 +6,7 @@
         "microphone": "*",
         "bluetooth": "*",
         "neopixel": "github:sbb777/pxt-neopixel#v0.6.15"
+       
       
         
     },
@@ -16,9 +17,6 @@
     ],
     "testFiles": [
         "test.ts"
-    ],
-    "supportedTargets": [
-        "microbit"
     ],
     "targetVersions": {
         "branch": "v3.0.66",

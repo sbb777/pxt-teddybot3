@@ -4,7 +4,8 @@
     "dependencies": {
         "core": "*",
         "microphone": "*",
-        "bluetooth": "*"
+        "bluetooth": "*",
+        "neopixel": "github:microsoft/pxt-neopixel"
         
     },
     "files": [

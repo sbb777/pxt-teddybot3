@@ -3,7 +3,9 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "bluetooth": "*"
+        
     },
     "files": [
         "main.blocks",
@@ -16,6 +18,13 @@
     "supportedTargets": [
         "microbit"
     ],
+    "targetVersions": {
+        "branch": "v3.0.66",
+        "tag": "v3.0.66",
+        "commits": "https://github.com/microsoft/pxt-microbit/commits/d622661f30f16ffddca48cd2482bb7ed64c70d08",
+        "target": "3.0.66",
+        "pxt": "6.0.38"
+    },
     "preferredEditor": "tsprj",
     "yotta": {
         "config": {

@@ -630,7 +630,7 @@ namespace teddybot {
     //% blockId="teddybot_sonar" block="read sonar as %unit"
     //% weight=90
     //% subcategory=Sensors
-    export function sonar(unit: BBPingUnit): number {
+    export function sonar(unit: TBPingUnit): number {
         // send pulse
         let trig = DigitalPin.P8;
         let echo = DigitalPin.P12;
@@ -649,8 +649,8 @@ namespace teddybot {
                 break;
         }
         switch (unit) {
-            case BBPingUnit.Centimeters: return Math.round(d / 58);
-            case BBPingUnit.Inches: return d / 148;
+            case TBPingUnit.Centimeters: return Math.round(d / 58);
+            case TBPingUnit.Inches: return d / 148;
             default: return d;
         }
     }

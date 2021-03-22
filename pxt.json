@@ -3,8 +3,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*",
-        "bluetooth": "*",
+        "microphone": "*",       
         "neopixel": "github:sbb777/pxt-neopixel#v0.6.15"
                    
     },

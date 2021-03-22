@@ -130,7 +130,7 @@ namespace teddybot {
     /**
     * Ping unit for sensor.
     */
-    export enum BBPingUnit {
+     export enum TBPingUnit {
         //% block="cm"
         Centimeters,
         //% block="inches"
@@ -138,7 +138,6 @@ namespace teddybot {
         //% block="μs"
         MicroSeconds
     }
-
 
     let initialized = false
     let initializedMatrix = false
@@ -339,12 +338,20 @@ namespace teddybot {
      * @param brightness brightness of motor (0 to 255). eg: 180
      */
     //% blockId="LED" block="Light %Leds|led(s) at brightness %brightness"
-    //% weight=80
+    //% weight=80    
+    //% brightness.min=0 brightness.max=255
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% subcategory=LEDS   
     export function leds(leds: Leds, brightness: number): void {
         if (!initialized) {
             initPCA9685() // 이 부분 때문에 먼저 켜둔  led가 motor run을 넣으면 꺼지구나!!
         }
+
+        brightness = brightness * 16; // map 255 to 4096
+        if (brightness >= 4096) {
+            brightness = 4095
+        }
+
 
         if ((leds == 0x01)) {
 
@@ -426,15 +433,70 @@ namespace teddybot {
      * @param motor2 Second Motor; eg: M2A, M2B
      * @param speed2 [-255-255] speed of motor; eg: 150, -150
     */
-    //% blockId=teddybot_motor_dual block="Motor|%motor1|speed %speed1|%motor2|speed %speed2"
+    //% blockId=teddybot_motor_dual block="Motor L|speed %speed1|Motor R|speed %speed2"
     //% weight=84
     //% speed1.min=-255 speed1.max=255
-    //% speed2.min=-255 speed2.max=255
+    //% speed2.min=-255 speed2.max=255    
+    //% speed2.min=-255 speed2.max=255    
+    //% motor2.defl=Right
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% subcategory=Motors  
-    export function MotorRunDual(motor1: Motors, speed1: number, motor2: Motors, speed2: number): void {
-        MotorRun(motor1, speed1);
-        MotorRun(motor2, speed2);
+    export function MotorRunDual(speed1: number, speed2: number): void {
+
+        if (!initialized) {
+            initPCA9685() 
+        }
+        speed1 = speed1 * 16; // map 255 to 4096
+        if (speed1 >= 4096) {
+            speed1 = 4095
+        }
+        if (speed1 <= -4096) {
+            speed1 = -4095
+        }
+
+        speed2 = speed2 * 16; // map 255 to 4096
+        if (speed2 >= 4096) {
+            speed2 = 4095
+        }
+        if (speed2 <= -4096) {
+            speed2 = -4095
+        }
+
+
+        if (speed1 >= 0) {
+
+            setPwm(3, 0, 4095)
+            setPwm(4, 0, 0)
+
+            setPwm(2, 0, speed1)
+
+        } else {
+            setPwm(3, 0, 0)
+            setPwm(4, 0, 4095)
+
+            setPwm(2, 0, -speed1)
+
+        }
+
+
+
+        if (speed2 >= 0) {
+            setPwm(6, 0, 4095)
+            setPwm(7, 0, 0)
+
+            setPwm(5, 0, speed2)
+
+        } else {
+
+            setPwm(6, 0, 0)
+            setPwm(7, 0, 4095)
+
+            setPwm(5, 0, -speed2)
+
+
+        }
+
+
     }
 
     /**
@@ -620,7 +682,7 @@ namespace teddybot {
     //% blockId="tb_colors" block=%color
     //% weight=55
     //% advanced=true
-    export function BBColours(color: TBColors): number {
+    export function TBColours(color: TBColors): number {
         return color;
     }
 
@@ -657,6 +719,7 @@ namespace teddybot {
         // 50hz: 20,000 us
         let v_us = (degree * 1800 / 180 + 600) // 0.6 ~ 2.4
         let value = v_us * 4096 / 20000
+        //setPwm(index + 7, 0, value)
         setPwm(index, 0, value)
     }
 

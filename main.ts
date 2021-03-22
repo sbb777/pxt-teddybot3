@@ -48,13 +48,13 @@ namespace teddybot {
 
     export enum Servos {
         S1 = 0x01,
-        S2 = 0x02,
-        S3 = 0x03,
-        S4 = 0x04,
-        S5 = 0x05,
-        S6 = 0x06,
-        S7 = 0x07,
-        S8 = 0x08
+        S2 = 0x02
+        // S3 = 0x03,
+        // S4 = 0x04,
+        // S5 = 0x05,
+        // S6 = 0x06,
+        // S7 = 0x07,
+        // S8 = 0x08
     }
 
     export enum Motors {
@@ -657,7 +657,7 @@ namespace teddybot {
         // 50hz: 20,000 us
         let v_us = (degree * 1800 / 180 + 600) // 0.6 ~ 2.4
         let value = v_us * 4096 / 20000
-        setPwm(index + 7, 0, value)
+        setPwm(index, 0, value)
     }
 
 
